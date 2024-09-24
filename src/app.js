@@ -19,17 +19,38 @@ window.onload = function() {
     return color;
   }
 
-  const cardElement = document.querySelector(".card");
-  cardElement.classList.add("mt-5");
+  const generateCard = () => {
+    let cardElement = document.createElement("div");
+    cardElement.classList = "card mx-auto mt-5";
+    cardElement.style.width = "300px";
 
-  const colorElementHtml = document.querySelector("#color-generated");
+    const newColor = generateColor();
 
-  const newColor = generateColor();
+    let backgroundDivElement = document.createElement("div");
+    backgroundDivElement.style.width = "100%";
+    backgroundDivElement.style.height = "300px";
+    backgroundDivElement.style.backgroundColor = newColor;
+    backgroundDivElement.style.display = "flex";
+    backgroundDivElement.style.flexDirection = "column";
 
-  colorElementHtml.classList.remove("bg-black");
-  colorElementHtml.style.backgroundColor = newColor;
+    const textColorElement = document.createElement("strong");
+    textColorElement.style.marginTop = "auto";
+    textColorElement.style.marginBottom = "auto";
 
-  const colorTextParagraph = document.querySelector("#color-text");
+    textColorElement.innerText = newColor;
 
-  colorTextParagraph.innerHTML = `Color: <strong>${newColor}</strong>`;
+    backgroundDivElement.style.color = "white";
+    backgroundDivElement.appendChild(textColorElement);
+
+    backgroundDivElement.style.textAlign = "center";
+
+    cardElement.appendChild(backgroundDivElement);
+    return cardElement;
+  };
+
+  const colorContainerElement = document.querySelector("#color-container");
+
+  for (let i = 0; i < 9; i++) {
+    colorContainerElement.appendChild(generateCard());
+  }
 };
