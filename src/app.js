@@ -21,7 +21,11 @@ window.onload = function() {
 
   const generateCard = () => {
     let cardElement = document.createElement("div");
-    cardElement.classList = "card mx-auto mt-5";
+    // cardElement.classList = "card mx-auto mt-5";
+    cardElement.classList.add("card");
+    cardElement.classList.add("mx-auto");
+    cardElement.classList.add("mt-2");
+
     cardElement.style.width = "300px";
 
     const newColor = generateColor();
@@ -49,8 +53,19 @@ window.onload = function() {
   };
 
   const colorContainerElement = document.querySelector("#color-container");
+  let colorCard = generateCard();
 
-  for (let i = 0; i < 9; i++) {
-    colorContainerElement.appendChild(generateCard());
+  colorCard.id = "first-color";
+
+  colorContainerElement.appendChild(colorCard);
+
+  const buttonElement = document.querySelector("#first-button");
+
+  function whatHappensOnClick(evento) {
+    const newColorCard = generateCard();
+    colorContainerElement.replaceChild(newColorCard, colorCard);
+    colorCard = newColorCard;
   }
+
+  buttonElement.addEventListener("click", whatHappensOnClick);
 };
